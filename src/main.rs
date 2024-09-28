@@ -6,7 +6,7 @@ use std::process::{Command};
 use std_ext::{OutputExt};
 
 fn main() -> AnyResult<()> {
-    let args = args_os().skip(1);
+    let args = args_os().skip(2);
 
     let (reader, writer) = os_pipe::pipe()?;
 
