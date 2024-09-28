@@ -3,7 +3,6 @@ use std::env::{args_os};
 use std::io;
 use std::io::{BufRead, BufReader};
 use std::process::{Command};
-use std_ext::{OutputExt};
 
 fn main() -> AnyResult<()> {
     let args = args_os().skip(2);
