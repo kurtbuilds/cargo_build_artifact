@@ -1,5 +1,5 @@
 use anyhow::Result as AnyResult;
-use std::env::{args_os};
+use std::env::{args_os, var};
 use std::io;
 use std::io::{BufRead, BufReader};
 use std::process::{Command};
@@ -7,10 +7,11 @@ use std::process::{Command};
 fn main() -> AnyResult<()> {
     let args = args_os().skip(2);
 
+    let cargo_command = var("CARGO_BUILD_ARTIFACT_COMMAND").unwrap_or_else(|_| "build".to_string());
     let (reader, writer) = os_pipe::pipe()?;
 
     let mut child = Command::new("cargo")
-        .arg("build")
+        .arg(&cargo_command)
         .arg("--message-format=json-diagnostic-rendered-ansi")
         .arg("--color=always")
         .args(args)
